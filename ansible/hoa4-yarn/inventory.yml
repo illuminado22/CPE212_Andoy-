@@ -8,6 +8,6 @@ all:
         ubuntu2:
           ansible_host: 192.168.56.103
           ansible_user: server-2
-linuxservers:
-  children:
-    ubuntu:
+    linuxservers:
+      children:
+        ubuntu:
