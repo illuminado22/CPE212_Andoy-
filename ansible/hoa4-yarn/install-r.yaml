@@ -1,0 +1,32 @@
+---
+- hosts: ubuntu3
+  become: true
+  tasks:
+    - name: Install prerequisites for custom repositories
+      apt:
+        name:
+          - dirmngr
+          - gnupg
+          - apt-transport-https
+          - ca-certificates 
+          - software-properties-common
+        state: present
+        update_cache: yes
+    - name: Add CRAN GPG sign something
+      apt_key:
+        url:  https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc
+        state:  present
+
+    - name: Add CRAN repo to source list
+      apt_repository:
+        repo: "deb https://cloud.r-project.org/bin/linux/ubuntu noble-cran40/"
+        state:  present
+        update_cache: yes
+    
+    - name:
+      apt:
+        name: r-base
+        state: present
+
+    - name: installing sqlite
+      apt: 
