@@ -1,0 +1,10 @@
+--- 
+- hosts: centos
+  become: true
+  tasks:
+    - name: Installing nginx 
+      package:
+        name:
+          - "{{ nginx_package }}"
+        state: latest 
+        update_cache: yes 

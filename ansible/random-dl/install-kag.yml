@@ -1,0 +1,21 @@
+---
+- hosts: ubuntu3
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install Python3 and pip
+      apt:
+        name:
+          - python3
+          - python3-pip
+        state: present
+
+    - name: Install Kaggle CLI via pip
+      pip:
+        name: kaggle
+        state: present
+        break_system_packages: true

@@ -5,9 +5,27 @@ all:
         ubuntu1:
           ansible_host: 192.168.56.102
           ansible_user: server-1
+          apache_package: apache2
+          php_package: libapache2-mod-php
         ubuntu2:
           ansible_host: 192.168.56.103
           ansible_user: server-2
+          apache_package: apache2
+          php_package: libapache2-mod-php
+        ubuntu3:
+          ansible_host: 192.168.56.105
+          ansible_user: vboxuser
+          apache_package: apache2
+          php_package: libapache2-mod-php
+    centos:
+      hosts:
+        centos1:
+          ansible_host: 192.168.56.106
+          ansible_user: cent-server
+          apache_package: httpd
+          php_package: php
+          nginx_package: nginx
     linuxservers:
       children:
         ubuntu:
+        centos:

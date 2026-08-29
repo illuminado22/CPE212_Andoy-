@@ -30,3 +30,6 @@
 
     - name: installing sqlite
       apt: 
+        name: sqlite3
+        state:  present
+        
