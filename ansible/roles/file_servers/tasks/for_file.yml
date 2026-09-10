@@ -1,0 +1,14 @@
+---
+- name: install samba package (CentOS)
+  dnf:     
+    name: samba
+    state: latest
+  when: ansible_distribution == "CentOS"
+
+- name: isntall samba package (Ubuntu)
+  apt: 
+    name: samba
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+  
