@@ -4,3 +4,7 @@ I'm a Computer engineer student! Here at TIP QC
 
 This repository is all about automating server.
 
+debian = workspace
+cent = web
+ubuntu1 = db
+ubuntu2 = file

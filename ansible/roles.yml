@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+    - name: update cache in all servers
+      tags: always
+      package:
+        update_cache: yes
+
+
+- hosts: web_servers
+  become: true
+  roles:
+    - role: web_servers
+      tags: web
+
+- hosts: db_servers
+  become: true
+  roles:
+    - role: db_servers
+      tags: db
+
+- hosts: file_servers
+  become: true
+  roles:
+    - role: file_servers
+      tags: file 

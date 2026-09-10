@@ -1,12 +1,43 @@
 ---
+- hosts: all
+  become: true  
+  pre_tasks:
+
+    - name: udpate repo index (CentOS)
+      tags: always
+      dnf: 
+        update_cache: yes
+      changed_when: false
+      when: ansible_distribution == "CentOS"
+
+    - name: install updates (Ubuntu)
+      tags: always
+      apt: 
+        update_cache: yes
+      changed_when: false
+      when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  roles: 
+    - base
+
+- hosts: workstations
+  become: true
+  roles:
+    - workstations
+
 - hosts: web_servers
   become: true
-  tasks:
-    - name: copy default html file for site
-      tags: apache, apache2, httpd
-      copy:
-        src: files/default_site.html
-        dest: /var/www/html/index.html
-        owner: root
-        group: root
-        mode: '0644'
+  roles:
+    - web_servers
+
+- hosts:  db_servers
+  become: true
+  roles:  
+    - db_servers
+
+- hosts: file_servers
+  become: true
+  roles:
+    - file_servers
