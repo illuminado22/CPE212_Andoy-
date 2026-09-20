@@ -1,0 +1,25 @@
+all: 
+  hosts:
+    ubuntu1:
+      ansible_user: server-1
+      ansible_host: 192.168.56.102
+    
+    ubuntu2:
+      ansible_user: server-2
+      ansible_host: 192.168.56.103
+
+    centos:
+      ansible_user: cent-server
+      ansible_host: 192.168.56106
+
+children:
+  web_servers:
+    hosts:
+      ubuntu1:
+
+  db_servers:
+    ubuntu2:
+
+  file_servers:
+    cent-server
+
