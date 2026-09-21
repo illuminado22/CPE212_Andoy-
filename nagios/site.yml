@@ -1,3 +1,8 @@
 ---
 - name: install magios core
-  hosts:  
+  hosts: nagios-server
+  become: true
+  gather_facts: true
+
+  roles:
+    - role: nagios
