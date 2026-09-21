@@ -1,6 +1,5 @@
 all:    
   children:
-  
     nagios-ubuntu:
       hosts:
         ubuntu1:
@@ -12,6 +11,7 @@ all:
           ansible_host: 192.168.56.106
           ansible_user: cent-server
 
-nagios-server:
-  ubuntu1:
-  centos1:
+    nagios-server:
+      hosts:
+        ubuntu1:
+        centos1:
