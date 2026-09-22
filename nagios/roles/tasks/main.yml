@@ -1,0 +1,36 @@
+---
+
+- name: Update package cache on Ubuntu and CentOS
+  ansible.builtin.package:
+    update_cache: true
+
+- name: Install nagios in ubuntu
+  ansible.builtin.apt:
+    name:
+      - nagios4
+      - nagios-plugins-basic
+    state: present
+    update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+    notify: restart nagios ubuntu
+
+- name: Install EPEL repo on CentOS
+  ansible.builtin.dnf:
+    name: epel-release
+    state: present
+  when: ansible_distribution == "CentOS"
+
+- name: Install nagios on centos
+  ansible.builtin.dnf:
+    name: 
+      - nagios
+      - nagios-plugins-all
+    state: present
+    when: ansible_distribution == "CentOS"
+    notify: restart nagios centos
+
+- name: Ensure that nagios is ruuning and enabled
+  ansible.builtin.service:
+    name: "{{ 'nagios4' if ansible_distribution == 'Ubuntu' else 'nagios4' }}"
+    state: started
+    enabled: yes
